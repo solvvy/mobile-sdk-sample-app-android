@@ -564,7 +564,7 @@ public class TestSolvvyLauncher extends AppCompatActivity {
     }
 
     private void launchTestSolvvy() {
-        solvvySdkInstance.startSolvvy(this);
+        solvvySdkInstance.startSolvvy(this, "http://www.google.com");
     }
 
 }

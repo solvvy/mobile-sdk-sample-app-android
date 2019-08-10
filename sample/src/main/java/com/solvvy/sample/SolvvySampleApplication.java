@@ -9,10 +9,11 @@
 package com.solvvy.sample;
 
 import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 
-public final class SolvvySampleApplication extends Application {
+public final class SolvvySampleApplication extends MultiDexApplication {
     private static final String TAG = "SolvvySampleApplication";
 
     @Override

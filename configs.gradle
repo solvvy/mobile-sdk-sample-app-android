@@ -1,7 +1,7 @@
 ext {
     applicationId = "com.solvvy.sample"
-    versionCode  = 2
-    versionName = "1.0.1"
+    versionCode  = 3
+    versionName = "1.0.2"
     //Android API
     compileSdkVersion = 28
     minSdkVersion = 19
@@ -20,4 +20,5 @@ ext {
     okHttp = '3.10.0'
     rxJava2 = '2.1.13'
     rxAndroid = '2.0.2'
+    certificateTransparencyVersion = '0.1.4'
 }
