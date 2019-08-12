@@ -14,3 +14,6 @@ Click Build and the Gradle build will run.
 You may need to run File -> Sync Project with Gradle Files to be able to Run the app.
 
 Then click Run.
+
+#### Documentation
+You can find the complete documentation in the file [Documentatio.md](Documentation.md)
