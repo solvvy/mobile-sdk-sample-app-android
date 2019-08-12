@@ -1,4 +1,4 @@
-### Solvvy Android SDK Documentation (V1.0.1)
+### Solvvy Android SDK Documentation (V1.1.0)
 ## mobile-sdk-sample-app-android
 
 A sample app showing how to incorporate the Solvvy Android mobile SDK for automated, intelligent customer self-service.
