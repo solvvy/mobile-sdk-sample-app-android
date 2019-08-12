@@ -9,8 +9,13 @@ Download [Android Studio](https://developer.android.com/studio) and install it.
 
 Clone this repository and open the root folder in Android Studio.
 
+Checkout releases/v1.1.0 branch
+
 Click Build and the Gradle build will run.
 
 You may need to run File -> Sync Project with Gradle Files to be able to Run the app.
 
 Then click Run.
+
+#### Documentation
+You can find the complete documentation in the file [Documentatio.md](Documentation.md)
