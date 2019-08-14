@@ -1,9 +1,9 @@
 package com.solvvy.sample;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -27,7 +27,7 @@ public class TestSolvvyLauncher extends AppCompatActivity {
 
     SolvvySdk.SolvvySdkCallBack solvvySdkCallBack = new SolvvySdk.SolvvySdkCallBack() {
         @Override
-        public List<SupportOption> getSupportOption(Map<String, String> solvvyState) {
+        public List<SupportOption> getSupportOption(Map<String, Object> solvvyState) {
             List<SupportOption> supportOptions = new ArrayList<>();
             supportOptions.add(new ChatSupportOption());
             supportOptions.add(new EmailSupportOption());
@@ -44,14 +44,14 @@ public class TestSolvvyLauncher extends AppCompatActivity {
         @Override
         public void handleChatOption(final SupportOption supportOption,
                                      final FragmentActivity context,
-                                     Map<String, String> solvvyState) {
+                                     Map<String, Object> solvvyState) {
             //Implement
         }
 
         @Override
         @SuppressWarnings("squid:CommentedOutCodeLine")
         public void handleCallOption(SupportOption supportOption, FragmentActivity context,
-                                     Map<String, String> solvvyState) {
+                                     Map<String, Object> solvvyState) {
             super.handleCallOption(supportOption, context, solvvyState);
             // discard the default implementation by not calling super.handleCallOption
             // (supportOption, context);
@@ -60,7 +60,7 @@ public class TestSolvvyLauncher extends AppCompatActivity {
         @Override
         @SuppressWarnings("squid:CommentedOutCodeLine")
         public void handleCommunityOption(SupportOption supportOption, FragmentActivity context,
-                                          Map<String, String> solvvyState) {
+                                          Map<String, Object> solvvyState) {
             super.handleCommunityOption(supportOption, context, solvvyState);
             // discard the default implementation by not calling super.handleCommunityOption
             // (supportOption, context);
@@ -69,13 +69,13 @@ public class TestSolvvyLauncher extends AppCompatActivity {
         @Override
         public void handleCustomOption(SupportOption supportOption,
                                        FragmentActivity context,
-                                       Map<String, String> solvvyState) {
+                                       Map<String, Object> solvvyState) {
             super.handleCustomOption(supportOption, context, solvvyState);
             // Called when user taps on the custom support option
         }
 
         @Override
-        public boolean showQuestionSearch(final Map<String, String> solvvyStates) {
+        public boolean showQuestionSearch(final Map<String, Object> solvvyStates) {
             return true;
         }
     };
@@ -93,9 +93,31 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                 initSolvvy();
                 SolvvySdk.Persona.Builder config = new SolvvySdk.Persona.Builder();
                 config.apiKey("a638e987-cef8-4f41-91be-d46d0f0ae8b9~6bbn06VQf6Tf9CP202opSWRyGgvaI6oKq7IudmHSwK8ofupq8MNApqnFqq58pXul")
-                        .connectorIdForTicketCreation("08c169c7-5079-4787-99ea-0ad2941bf219")
+                        .connectorIdForTicketCreation("65f03902-1fc1-48a4-87c1-50d859f16fa7")
                         .orgId("314");
+                SolvvySdk.FormSettings.Builder commonOptionBuilder =
+                        new SolvvySdk.FormSettings.Builder();
+                SolvvySdk.FormSettings.PreQuestionForm preQuest =
+                        new SolvvySdk.FormSettings.PreQuestionForm();
+                preQuest.setShow(false);
+                SolvvySdk.FormSettings.PreContactForm preFrom =
+                        new SolvvySdk.FormSettings.PreContactForm();
+                preFrom.setShow(true);
+                Map<String, Object> initialContext = new HashMap<>();
+                final String[] tags = {
+                        "ELECTRICIAN__TestPartner", "Device issue"
+                };
+                initialContext.put("tags", tags);
+                commonOptionBuilder.preContactForm(preFrom)
+                        .preQuestionForm(preQuest)
+                        .allowAttachments(true)
+                        .requireCaptcha(false)
+                        .solvvyState(initialContext)
+                        .userSelectsForm(true);
+                solvvySdkInstance.setSolvvySdkCallback(solvvySdkCallBack);
                 solvvySdkInstance.init(config.build());
+                solvvySdkInstance.setSupportEmailId("support@solvvy.com");
+                solvvySdkInstance.setFormSettings(commonOptionBuilder.build());
                 launchTestSolvvy();
 
             }
@@ -122,10 +144,13 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                         new SolvvySdk.FormSettings.PreContactForm();
                 preFrom.setShow(true);
 
-                Map<String, String> initialContext = new HashMap<>();
+                Map<String, Object> initialContext = new HashMap<>();
                 initialContext.put("custom_303132", "test subject");
                 initialContext.put("custom_23028966", "administration__it_related__zendesk_users");
-
+                final String[] tags = new String[]{
+                        "ELECTRICIAN__TestPartner", "Device issue"
+                };
+                initialContext.put("tags", tags);
                 List<String> hideList = new ArrayList<>(2);
                 hideList.add("custom_303132");
                 hideList.add("custom_23028966");
@@ -174,10 +199,12 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                         new SolvvySdk.FormSettings.PreContactForm();
                 preFrom.setShow(true);
                 preFrom.setFieldIdWhitelist(Arrays.asList(preContactFieldWhiteList));
-
-                Map<String, String> initialContext = new HashMap<>();
+                Map<String, Object> initialContext = new HashMap<>();
                 initialContext.put("email", "test@gmail.com");
-
+                final String[] tags = new String[]{
+                        "ELECTRICIAN__TestPartner", "Device issue"
+                };
+                initialContext.put("tags", tags);
                 formSettings.preContactForm(preFrom)
                         .preQuestionForm(preQuest)
                         .allowAttachments(true)
@@ -358,7 +385,7 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                         solvvySdkInstance.setSolvvySdkCallback(new SolvvySdk.SolvvySdkCallBack() {
                             @Override
                             public List<SupportOption> getSupportOption(
-                                    Map<String, String> solvvyState) {
+                                    Map<String, Object> solvvyState) {
                                 List<SupportOption> supportOptions = new ArrayList<>();
                                 supportOptions.add(new EmailSupportOption());
                                 return supportOptions;
@@ -379,7 +406,7 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                         solvvySdkInstance.setSolvvySdkCallback(new SolvvySdk.SolvvySdkCallBack() {
                             @Override
                             public List<SupportOption> getSupportOption(
-                                    Map<String, String> solvvyState) {
+                                    Map<String, Object> solvvyState) {
                                 List<SupportOption> supportOptions = new ArrayList<>();
                                 supportOptions.add(new ChatSupportOption());
                                 supportOptions.add(new EmailSupportOption());
@@ -398,7 +425,7 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                 buildBasicConfig();
                 solvvySdkInstance.setSolvvySdkCallback(new SolvvySdk.SolvvySdkCallBack() {
                     @Override
-                    public List<SupportOption> getSupportOption(Map<String, String> solvvyState) {
+                    public List<SupportOption> getSupportOption(Map<String, Object> solvvyState) {
                         List<SupportOption> supportOptions = new ArrayList<>();
                         CustomSupportOption customSupportOption = new CustomSupportOption();
                         customSupportOption.setTitle("Custom");
@@ -421,7 +448,7 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                 buildBasicConfig();
                 solvvySdkInstance.setSolvvySdkCallback(new SolvvySdk.SolvvySdkCallBack() {
                     @Override
-                    public boolean showQuestionSearch(Map<String, String> solvvyState) {
+                    public boolean showQuestionSearch(Map<String, Object> solvvyState) {
                         return false;
                     }
                 });
@@ -467,7 +494,7 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                 launchTestSolvvy();
                 solvvySdkInstance.setSolvvySdkCallback(new SolvvySdk.SolvvySdkCallBack() {
                     @Override
-                    public List<SupportOption> getSupportOption(Map<String, String> solvvyState) {
+                    public List<SupportOption> getSupportOption(Map<String, Object> solvvyState) {
                         List<SupportOption> supportOptions = new ArrayList<>();
                         final PhoneSupportOption phoneSupportOption = new PhoneSupportOption();
                         phoneSupportOption.setPhoneNo("+911234567890");
@@ -487,7 +514,7 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                 launchTestSolvvy();
                 solvvySdkInstance.setSolvvySdkCallback(new SolvvySdk.SolvvySdkCallBack() {
                     @Override
-                    public List<SupportOption> getSupportOption(Map<String, String> solvvyState) {
+                    public List<SupportOption> getSupportOption(Map<String, Object> solvvyState) {
                         List<SupportOption> supportOptions = new ArrayList<>();
                         final EmailSupportOption supportOption = new EmailSupportOption();
                         supportOptions.add(supportOption);
@@ -506,7 +533,7 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                 launchTestSolvvy();
                 solvvySdkInstance.setSolvvySdkCallback(new SolvvySdk.SolvvySdkCallBack() {
                     @Override
-                    public List<SupportOption> getSupportOption(Map<String, String> solvvyState) {
+                    public List<SupportOption> getSupportOption(Map<String, Object> solvvyState) {
                         List<SupportOption> supportOptions = new ArrayList<>();
                         final CommunitySupportOption supportOption = new CommunitySupportOption();
                         supportOption.setCommunityLink("https://google.com");
@@ -526,7 +553,7 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                 launchTestSolvvy();
                 solvvySdkInstance.setSolvvySdkCallback(new SolvvySdk.SolvvySdkCallBack() {
                     @Override
-                    public List<SupportOption> getSupportOption(Map<String, String> solvvyState) {
+                    public List<SupportOption> getSupportOption(Map<String, Object> solvvyState) {
                         List<SupportOption> supportOptions = new ArrayList<>();
                         final ChatSupportOption supportOption = new ChatSupportOption();
                         supportOptions.add(supportOption);
@@ -535,7 +562,7 @@ public class TestSolvvyLauncher extends AppCompatActivity {
 
                     @Override
                     public void handleChatOption(SupportOption supportOption,
-                                                 FragmentActivity context, Map<String, String> solvvyState) {
+                                                 FragmentActivity context, Map<String, Object> solvvyState) {
                         super.handleChatOption(supportOption, context, solvvyState);
                         Toast.makeText(getBaseContext(), "Chat option clicked", Toast.LENGTH_SHORT).show();
                         solvvySdkInstance.stopSolvvy();
