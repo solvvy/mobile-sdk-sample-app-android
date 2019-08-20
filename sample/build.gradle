@@ -42,6 +42,6 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxJava2"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroid"
-    implementation "com.solvvy.sdk:solvvy:1.1.1"
+    implementation "com.solvvy.sdk:solvvy:1.1.2"
 }
 

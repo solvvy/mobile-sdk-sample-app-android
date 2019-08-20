@@ -8,47 +8,34 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/sense"
+            android:id="@+id/defaultFormOption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Sense"/>
+            android:text="Default Form"/>
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/orchesrated_app"
+            android:id="@+id/SpecificFormOption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Orchestrated App"/>
+            android:text="Specific Form"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/zwift"
+            android:id="@+id/UserFormSelectionOption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Zwift"/>
+            android:text="Form Selection"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/up_work"
+            android:id="@+id/SpecificFormSelectedAndUserFormSelectionOption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Up Work"/>
+            android:text="Form selection with specific form selected"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/task_rabbit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Task Rabbit"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/head_space"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Head Space"/>
 
         <TextView android:layout_width="match_parent"
                   android:layout_height="40dp"
