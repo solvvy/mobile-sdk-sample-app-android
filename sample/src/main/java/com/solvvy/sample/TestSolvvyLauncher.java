@@ -15,8 +15,6 @@ import com.solvvy.sdk.model.PhoneSupportOption;
 import com.solvvy.sdk.model.SupportOption;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -81,41 +79,40 @@ public class TestSolvvyLauncher extends AppCompatActivity {
     };
     private SolvvySdk solvvySdkInstance;
 
+    private SolvvySdk.Persona getSolvyPersona() {
+        return new SolvvySdk.Persona.Builder()
+                .apiKey("5dc04bb4-6bbd-4b4e-a1e5-54a6b91ab4e1~7l0915aPyx8Oc8Osss0s00CCW8Kg44w5jIIELyt23wOk4KGCKCgO80o0o0040s")
+                .connectorIdForTicketCreation("d3bdb21e-451b-4267-871e-e6f79a37dc87")
+                .orgId("2").build();
+    }
+
     @Override
     @SuppressWarnings("squid:S1192")
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_solvvy_launcher);
 
-        findViewById(R.id.sense).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.defaultFormOption).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 initSolvvy();
-                SolvvySdk.Persona.Builder config = new SolvvySdk.Persona.Builder();
-                config.apiKey("a638e987-cef8-4f41-91be-d46d0f0ae8b9~6bbn06VQf6Tf9CP202opSWRyGgvaI6oKq7IudmHSwK8ofupq8MNApqnFqq58pXul")
-                        .connectorIdForTicketCreation("65f03902-1fc1-48a4-87c1-50d859f16fa7")
-                        .orgId("314");
+
                 SolvvySdk.FormSettings.Builder commonOptionBuilder =
                         new SolvvySdk.FormSettings.Builder();
                 SolvvySdk.FormSettings.PreQuestionForm preQuest =
                         new SolvvySdk.FormSettings.PreQuestionForm();
                 preQuest.setShow(false);
-                SolvvySdk.FormSettings.PreContactForm preFrom =
+
+                SolvvySdk.FormSettings.PreContactForm preContactForm =
                         new SolvvySdk.FormSettings.PreContactForm();
-                preFrom.setShow(true);
-                Map<String, Object> initialContext = new HashMap<>();
-                final String[] tags = {
-                        "ELECTRICIAN__TestPartner", "Device issue"
-                };
-                initialContext.put("tags", tags);
-                commonOptionBuilder.preContactForm(preFrom)
+                preContactForm.setShow(true);
+                commonOptionBuilder
                         .preQuestionForm(preQuest)
+                        .preContactForm(preContactForm)
                         .allowAttachments(true)
-                        .requireCaptcha(false)
-                        .solvvyState(initialContext)
-                        .userSelectsForm(true);
+                        .requireCaptcha(false);
                 solvvySdkInstance.setSolvvySdkCallback(solvvySdkCallBack);
-                solvvySdkInstance.init(config.build());
+                solvvySdkInstance.init(getSolvyPersona());
                 solvvySdkInstance.setSupportEmailId("support@solvvy.com");
                 solvvySdkInstance.setFormSettings(commonOptionBuilder.build());
                 launchTestSolvvy();
@@ -123,99 +120,89 @@ public class TestSolvvyLauncher extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.orchesrated_app).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.SpecificFormOption).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 initSolvvy();
-                SolvvySdk.Persona.Builder config = new SolvvySdk.Persona.Builder();
-                config.apiKey(
-                        "f251d92a-516b-44eb-916c-c1f022696c3f"
-                                +
-                                "~9M4yWl9W8xsgxjM23TK1Fm31hAS906NYijGmmS8XKD1km1o34s2LB6Ud8eKyCx57")
-                        .connectorIdForTicketCreation("d99d93c6-a021-47ca-ab19-d7e9b258f32d")
-                        .orgId("116");
 
                 SolvvySdk.FormSettings.Builder commonOptionBuilder =
                         new SolvvySdk.FormSettings.Builder();
                 SolvvySdk.FormSettings.PreQuestionForm preQuest =
                         new SolvvySdk.FormSettings.PreQuestionForm();
                 preQuest.setShow(false);
-                SolvvySdk.FormSettings.PreContactForm preFrom =
+
+                SolvvySdk.FormSettings.PreContactForm preContactForm =
                         new SolvvySdk.FormSettings.PreContactForm();
-                preFrom.setShow(true);
-
-                Map<String, Object> initialContext = new HashMap<>();
-                initialContext.put("custom_303132", "test subject");
-                initialContext.put("custom_23028966", "administration__it_related__zendesk_users");
-                final String[] tags = new String[]{
-                        "ELECTRICIAN__TestPartner", "Device issue"
-                };
-                initialContext.put("tags", tags);
-                List<String> hideList = new ArrayList<>(2);
-                hideList.add("custom_303132");
-                hideList.add("custom_23028966");
-
-                commonOptionBuilder.preContactForm(preFrom)
+                preContactForm.setShow(true);
+                commonOptionBuilder
                         .preQuestionForm(preQuest)
+                        .preContactForm(preContactForm)
                         .allowAttachments(true)
                         .requireCaptcha(false)
-                        .solvvyState(initialContext)
-                        .hidePropertyList(hideList)
+                        .customTicketFormId("774248")
+                        .userSelectsForm(false);
+                solvvySdkInstance.setSolvvySdkCallback(solvvySdkCallBack);
+                solvvySdkInstance.init(getSolvyPersona());
+                solvvySdkInstance.setSupportEmailId("support@solvvy.com");
+                solvvySdkInstance.setFormSettings(commonOptionBuilder.build());
+                launchTestSolvvy();
+            }
+        });
+        findViewById(R.id.SpecificFormSelectedAndUserFormSelectionOption).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initSolvvy();
+
+                SolvvySdk.FormSettings.Builder commonOptionBuilder =
+                        new SolvvySdk.FormSettings.Builder();
+                SolvvySdk.FormSettings.PreQuestionForm preQuest =
+                        new SolvvySdk.FormSettings.PreQuestionForm();
+                preQuest.setShow(true);
+
+                SolvvySdk.FormSettings.PreContactForm preContactForm =
+                        new SolvvySdk.FormSettings.PreContactForm();
+                preContactForm.setShow(true);
+                commonOptionBuilder
+                        .preQuestionForm(preQuest)
+                        .preContactForm(preContactForm)
+                        .allowAttachments(true)
+                        .requireCaptcha(false)
+                        .customTicketFormId("774248")
                         .userSelectsForm(true);
                 solvvySdkInstance.setSolvvySdkCallback(solvvySdkCallBack);
-                solvvySdkInstance.init(config.build());
+                solvvySdkInstance.init(getSolvyPersona());
                 solvvySdkInstance.setSupportEmailId("support@solvvy.com");
                 solvvySdkInstance.setFormSettings(commonOptionBuilder.build());
                 launchTestSolvvy();
             }
         });
 
-        findViewById(R.id.up_work).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.UserFormSelectionOption).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 initSolvvy();
-                SolvvySdk.Persona.Builder upworkConfig = new SolvvySdk.Persona.Builder();
-                upworkConfig.apiKey("880e73f9-9ca8-4ee3-9abb-e2369b11ec1f"
-                        + "~o4Qj1sO9muoswswkKCS00Kk4g08G8K8Fu7woqsA3xkoGWgc8cWww48kg8OSwCs")
-                        .orgId("1")
-                        .connectorIdForTicketCreation("db9b9928-7dfa-42bd-b4bf-7c202e6456c0");
-                String[] preContactFieldWhiteList = {"custom_44456188",
-                        "custom_44519307",
-                        "custom_44523707",
-                        "custom_44525407",
-                        "custom_44457808",
-                        "custom_44459308",
-                        "custom_44460968",
-                        "custom_44463528",
-                        "custom_44464668",
-                        "custom_44534007"
-                };
-                solvvySdkInstance.setSolvvySdkCallback(solvvySdkCallBack);
-                SolvvySdk.FormSettings.Builder formSettings = new SolvvySdk.FormSettings.Builder();
+
+                SolvvySdk.FormSettings.Builder commonOptionBuilder =
+                        new SolvvySdk.FormSettings.Builder();
                 SolvvySdk.FormSettings.PreQuestionForm preQuest =
                         new SolvvySdk.FormSettings.PreQuestionForm();
                 preQuest.setShow(false);
-                SolvvySdk.FormSettings.PreContactForm preFrom =
+
+                SolvvySdk.FormSettings.PreContactForm preContactForm =
                         new SolvvySdk.FormSettings.PreContactForm();
-                preFrom.setShow(true);
-                preFrom.setFieldIdWhitelist(Arrays.asList(preContactFieldWhiteList));
-                Map<String, Object> initialContext = new HashMap<>();
-                initialContext.put("email", "test@gmail.com");
-                final String[] tags = new String[]{
-                        "ELECTRICIAN__TestPartner", "Device issue"
-                };
-                initialContext.put("tags", tags);
-                formSettings.preContactForm(preFrom)
-                        .preQuestionForm(preQuest)
+                preContactForm.setShow(false);
+                commonOptionBuilder
                         .allowAttachments(true)
-                        .solvvyState(initialContext)
+                        .requireCaptcha(false)
                         .userSelectsForm(true);
-                solvvySdkInstance.init(upworkConfig.build());
-                solvvySdkInstance.setFormSettings(formSettings.build());
+                solvvySdkInstance.setSolvvySdkCallback(solvvySdkCallBack);
+                solvvySdkInstance.init(getSolvyPersona());
+                solvvySdkInstance.setSupportEmailId("support@solvvy.com");
+                solvvySdkInstance.setFormSettings(commonOptionBuilder.build());
                 launchTestSolvvy();
             }
         });
-        findViewById(R.id.task_rabbit).setOnClickListener(new View.OnClickListener() {
+        /*findViewById(R.id.task_rabbit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 initSolvvy();
@@ -267,8 +254,8 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                 solvvySdkInstance.setFormSettings(commonOptionBuilder.build());
                 launchTestSolvvy();
             }
-        });
-        findViewById(R.id.head_space).setOnClickListener(new View.OnClickListener() {
+        });*/
+        /*findViewById(R.id.head_space).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 initSolvvy();
@@ -296,9 +283,9 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                 solvvySdkInstance.setFormSettings(commonOptionBuilder.build());
                 launchTestSolvvy();
             }
-        });
+        });*/
 
-        findViewById(R.id.zwift).setOnClickListener(new View.OnClickListener() {
+       /* findViewById(R.id.zwift).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 initSolvvy();
@@ -327,7 +314,7 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                 launchTestSolvvy();
 
             }
-        });
+        });*/
 
 
         // Handle Heads Space test cases
@@ -355,7 +342,8 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                         new SolvvySdk.FormSettings.PreQuestionForm();
                 preQuest.setShow(true);
                 commonOptionBuilder
-                        .preQuestionForm(preQuest);
+                        .preQuestionForm(preQuest)
+                        .userSelectsForm(true);
                 solvvySdkInstance.setFormSettings(commonOptionBuilder.build());
 
                 launchTestSolvvy();
