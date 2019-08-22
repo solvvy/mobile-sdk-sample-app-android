@@ -15,6 +15,7 @@ import com.solvvy.sdk.model.PhoneSupportOption;
 import com.solvvy.sdk.model.SupportOption;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -84,6 +85,13 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                 .apiKey("5dc04bb4-6bbd-4b4e-a1e5-54a6b91ab4e1~7l0915aPyx8Oc8Osss0s00CCW8Kg44w5jIIELyt23wOk4KGCKCgO80o0o0040s")
                 .connectorIdForTicketCreation("d3bdb21e-451b-4267-871e-e6f79a37dc87")
                 .orgId("2").build();
+    }
+
+    private SolvvySdk.Persona getOnXPersona() {
+        return new SolvvySdk.Persona.Builder()
+                .apiKey("a68dd9cd-db88-478b-808b-9304035bae6d~8329Qaf826wT5Lq5iPLXgoHQ3AJ84o1zbEp4SD0hd5k1i9PTnvT6ivVo81I7SvSF")
+                .connectorIdForTicketCreation("278e8850-0b6c-493b-9d8e-29db6c0a6ce2")
+                .orgId("352").build();
     }
 
     @Override
@@ -186,17 +194,45 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                         new SolvvySdk.FormSettings.Builder();
                 SolvvySdk.FormSettings.PreQuestionForm preQuest =
                         new SolvvySdk.FormSettings.PreQuestionForm();
-                preQuest.setShow(false);
+                preQuest.setShow(true);
 
                 SolvvySdk.FormSettings.PreContactForm preContactForm =
                         new SolvvySdk.FormSettings.PreContactForm();
                 preContactForm.setShow(false);
+
+
+               /* Map<String, Object> state = new HashMap<>();
+                state.put("custom_33989767",  "app_android");*/
                 commonOptionBuilder
+                        .preQuestionForm(preQuest)
                         .allowAttachments(true)
                         .requireCaptcha(false)
+                        //.solvvyState(state)
                         .userSelectsForm(true);
                 solvvySdkInstance.setSolvvySdkCallback(solvvySdkCallBack);
                 solvvySdkInstance.init(getSolvyPersona());
+                solvvySdkInstance.setSupportEmailId("support@solvvy.com");
+                solvvySdkInstance.setFormSettings(commonOptionBuilder.build());
+                launchTestSolvvy();
+            }
+        });
+
+        findViewById(R.id.OnXForm).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initSolvvy();
+
+                SolvvySdk.FormSettings.Builder commonOptionBuilder =
+                        new SolvvySdk.FormSettings.Builder();
+               /* Map<String, Object> state = new HashMap<>();
+                state.put("custom_33989767",  "app_android");*/
+                commonOptionBuilder
+                        .allowAttachments(true)
+                        .requireCaptcha(false)
+                        //.solvvyState(state)
+                        .userSelectsForm(true);
+                solvvySdkInstance.setSolvvySdkCallback(solvvySdkCallBack);
+                solvvySdkInstance.init(getOnXPersona());
                 solvvySdkInstance.setSupportEmailId("support@solvvy.com");
                 solvvySdkInstance.setFormSettings(commonOptionBuilder.build());
                 launchTestSolvvy();

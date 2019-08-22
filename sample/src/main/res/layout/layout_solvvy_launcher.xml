@@ -35,7 +35,12 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Form selection with specific form selected"/>
-
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/OnXForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="OnXForm"/>
 
         <TextView android:layout_width="match_parent"
                   android:layout_height="40dp"
