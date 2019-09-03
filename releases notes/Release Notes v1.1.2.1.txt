@@ -1,0 +1,14 @@
+***************** RELEASE NOTES *****************
+************** SOLVVY ANDROID SDK ***************
+******************** v1.1.2.1 *********************
+
+New Features
+------------
+
+
+Fixes
+-----
+
+- [32048] All custom fields are rendered in Android
+
+- [32680] Handle/Prompt in a proper way the conditional fields form in Android for OnX report
