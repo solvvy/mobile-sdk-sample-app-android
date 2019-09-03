@@ -1,0 +1,39 @@
+***************** RELEASE NOTES *****************
+************** SOLVVY ANDROID SDK ***************
+******************** v1.1.2 *********************
+
+New Features
+------------
+
+- [30606] Implement Certificate Transparency Library.
+
+  Certificate Transparency aims to remedy these certificate-based threats by making the issuance 
+  and existence of SSL certificates open to scrutiny by domain owners, CAs, and domain users.
+
+  This version implements this approach to prevent malicious websites if they’re provisioned 
+  with mistakenly issued certificates or certificates that have been issued by a certificate
+  authority (CA) that’s been compromised or gone rogue.
+
+- [31380] Include launch_id in event metadata.
+
+  Adds launch_id data to improve the reports.
+
+
+Fixes
+-----
+
+- [30656] Android SDK allows more than 10MB of attachments.
+
+  Improves the attach files to prevent OutOfMemory issues that were crashing the application.
+
+- [31424] session_identifier is not always sent with events.
+  
+  Fixed and now it is sending the session_identifier in all cases.
+
+- [30718] Empty quotation marks in Android SDK
+
+  Removed the unexpected quotation marks on solutions list.
+
+- [32094] Fixed unexpected Form selection behaviors.
+
+- [32373] Fixed unexpected crashes related to Persona.ApiKey
