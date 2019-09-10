@@ -194,7 +194,7 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                         new SolvvySdk.FormSettings.Builder();
                 SolvvySdk.FormSettings.PreQuestionForm preQuest =
                         new SolvvySdk.FormSettings.PreQuestionForm();
-                preQuest.setShow(true);
+                preQuest.setShow(false);
 
                 SolvvySdk.FormSettings.PreContactForm preContactForm =
                         new SolvvySdk.FormSettings.PreContactForm();
