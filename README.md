@@ -1,4 +1,4 @@
-### Solvvy Android SDK Documentation (V1.1.2.1)
+### Solvvy Android SDK Documentation (V1.1.3)
 
 #### Getting Started
 
