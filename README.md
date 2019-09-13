@@ -16,7 +16,7 @@ repositories {
 ```
 
 ```java
-  implementation "com.solvvy.sdk:solvvy:1.1.2.1"
+  implementation "com.solvvy.sdk:solvvy:1.1.3"
 ```
 Add below permissions to AndroidManifest. If you already have those permissions in the manifest, you can ignore those. `READ_EXTERNAL_STORAGE` and `CALL_PHONE` are not mandatory permissions.
 ```xml
