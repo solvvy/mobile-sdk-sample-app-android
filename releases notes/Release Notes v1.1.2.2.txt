@@ -1,0 +1,14 @@
+***************** RELEASE NOTES *****************
+************** SOLVVY ANDROID SDK ***************
+******************** v1.1.2.2 *********************
+
+New Features
+------------
+
+
+Fixes
+-----
+
+- [32048] Improves custom field rendering.
+
+- [33292] Dependencies improves to support OnX client dependencies.
