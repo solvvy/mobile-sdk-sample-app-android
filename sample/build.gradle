@@ -43,6 +43,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxJava2"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroid"
     implementation "androidx.multidex:multidex:$multiDexVersion"
-    implementation "com.solvvy.sdk:solvvy:1.1.3"
+    implementation "com.solvvy.sdk:solvvy:1.1.2.3"
 }
 
