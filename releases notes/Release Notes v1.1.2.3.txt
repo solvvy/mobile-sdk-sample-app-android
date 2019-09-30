@@ -1,0 +1,14 @@
+***************** RELEASE NOTES *****************
+************** SOLVVY ANDROID SDK ***************
+******************** v1.1.2.3 *********************
+
+New Features
+------------
+
+
+Fixes
+-----
+
+- [35169] Unexpected behavior when user set SolvvyState data.
+
+- [35168] Ask Screen - Wrong characters required message.
