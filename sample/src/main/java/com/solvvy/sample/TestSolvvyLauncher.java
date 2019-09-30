@@ -1,11 +1,12 @@
 package com.solvvy.sample;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import com.solvvy.sdk.config.SolvvySdk;
 import com.solvvy.sdk.model.ChatSupportOption;
@@ -15,6 +16,7 @@ import com.solvvy.sdk.model.PhoneSupportOption;
 import com.solvvy.sdk.model.SupportOption;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -141,13 +143,24 @@ public class TestSolvvyLauncher extends AppCompatActivity {
 
                 SolvvySdk.FormSettings.PreContactForm preContactForm =
                         new SolvvySdk.FormSettings.PreContactForm();
-                preContactForm.setShow(true);
+                preContactForm.setShow(false);
+
+                Map<String, Object> state = new HashMap<>();
+                state.put("email",  "sa@sa.com");
+                //dropdown
+                state.put("custom_360000009888",  "WOLF");
+                //date
+                state.put("custom_81267848", Calendar.getInstance());
+                state.put("custom_80879687",  true);
+
+
                 commonOptionBuilder
                         .preQuestionForm(preQuest)
                         .preContactForm(preContactForm)
                         .allowAttachments(true)
                         .requireCaptcha(false)
-                        .customTicketFormId("774248")
+                        .customTicketFormId("863608")
+                        .solvvyState(state)
                         .userSelectsForm(false);
                 solvvySdkInstance.setSolvvySdkCallback(solvvySdkCallBack);
                 solvvySdkInstance.init(getSolvyPersona());
@@ -194,20 +207,26 @@ public class TestSolvvyLauncher extends AppCompatActivity {
                         new SolvvySdk.FormSettings.Builder();
                 SolvvySdk.FormSettings.PreQuestionForm preQuest =
                         new SolvvySdk.FormSettings.PreQuestionForm();
-                preQuest.setShow(true);
+                preQuest.setShow(false);
 
                 SolvvySdk.FormSettings.PreContactForm preContactForm =
                         new SolvvySdk.FormSettings.PreContactForm();
                 preContactForm.setShow(false);
 
 
-               /* Map<String, Object> state = new HashMap<>();
-                state.put("custom_33989767",  "app_android");*/
+                Map<String, Object> state = new HashMap<>();
+
+                state.put("email",  "sa@sa.com");
+                //dropdown
+                state.put("custom_360000009888",  "WOLF");
+                //date
+                state.put("custom_81267848", Calendar.getInstance());
+                state.put("custom_80879687",  true);
                 commonOptionBuilder
-                        .preQuestionForm(preQuest)
+                        //.preQuestionForm(preQuest)
                         .allowAttachments(true)
                         .requireCaptcha(false)
-                        //.solvvyState(state)
+                        .solvvyState(state)
                         .userSelectsForm(true);
                 solvvySdkInstance.setSolvvySdkCallback(solvvySdkCallBack);
                 solvvySdkInstance.init(getSolvyPersona());
@@ -224,16 +243,19 @@ public class TestSolvvyLauncher extends AppCompatActivity {
 
                 SolvvySdk.FormSettings.Builder commonOptionBuilder =
                         new SolvvySdk.FormSettings.Builder();
-               /* Map<String, Object> state = new HashMap<>();
-                state.put("custom_33989767",  "app_android");*/
+                Map<String, Object> state = new HashMap<>();
+                state.put("email",  "sa@sa.com");
+
+                //state.put("custom_33989767",  "App FOR Android (Phone or Tablet)");
+                state.put("custom_33989767",  "app_android");
                 commonOptionBuilder
                         .allowAttachments(true)
                         .requireCaptcha(false)
-                        //.solvvyState(state)
-                        .userSelectsForm(true);
+                        .solvvyState(state)
+                        .customTicketFormId("252998");
                 solvvySdkInstance.setSolvvySdkCallback(solvvySdkCallBack);
                 solvvySdkInstance.init(getOnXPersona());
-                solvvySdkInstance.setSupportEmailId("support@solvvy.com");
+                //solvvySdkInstance.setSupportEmailId("support@solvvy.com");
                 solvvySdkInstance.setFormSettings(commonOptionBuilder.build());
                 launchTestSolvvy();
             }
