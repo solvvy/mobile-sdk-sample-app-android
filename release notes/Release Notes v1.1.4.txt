@@ -1,0 +1,21 @@
+***************** RELEASE NOTES *****************
+************** SOLVVY ANDROID SDK ***************
+******************** v1.1.4 *********************
+
+New Features
+------------
+
+
+Fixes
+-----
+
+- [32803] Fixed issues:
+
+	- Missing "support_flow_launched" event when solvvy is launched
+	- Missing "question_form_shown" event when the question form is shown after solvvy launched
+	- The "solutions_viewed" event should not be sent until after the search completes (same time as intercept_shown) and only if there are solutions that come back and are shown. (currently its sending "solutions_viewed" as soon as the continue button is clicked)
+	- The "deflection" event for the inline solved button is being sent twice
+	- Missing "support_requested" event (with "source": "no_button" metadata) when the "I NEED HELP" button is clicked
+	- When there is only a single support option available and the support options screen is skipped then the "support_option_selected" event should have the "implicit" metadata property set to true (its currently being set to false in this situation)
+	- For the standard email/ticket form, the support_option_selected event should have the "type" metadata property set to "ticket" (its currently being set to "email").
+	- The create-ticket call (really all network calls) need x-session-id header with the session ID as the value (this is necessary so we can put external ticket id pixel in the right place)
