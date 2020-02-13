@@ -1,4 +1,4 @@
-### Solvvy Android SDK Documentation (V1.1.3)
+### Solvvy Android SDK Documentation (V1.1.4)
 
 #### Getting Started
 
@@ -16,7 +16,7 @@ repositories {
 ```
 
 ```java
-  implementation "com.solvvy.sdk:solvvy:1.1.3"
+  implementation "com.solvvy.sdk:solvvy:1.1.4"
 ```
 Add below permissions to AndroidManifest. If you already have those permissions in the manifest, you can ignore those. `READ_EXTERNAL_STORAGE` and `CALL_PHONE` are not mandatory permissions.
 ```xml
@@ -51,6 +51,8 @@ Create an instance of `Persona` and set your api key, org id and connector id. C
 
 That's it! You are ready to test `Solvvy` SDK integration in your app.
 
+"urlWebSupport" when Solvvy SDK is not able to reach out the API for security issues (SSL failed), Solvvy SDK will create a support option to redirect to this web support page.
+
 ```java
 SolvvySdk solvvySdkInstance = SolvvySdk.getInstance();
 Persona.Builder persona = new Persona.Builder();
@@ -59,7 +61,7 @@ persona.apiKey("YOUR API KEY")
 .orgId("YOUR ORG ID");
 
 solvvySdkInstance.init(persona.build());
-solvvySdkInstance.startSolvvy(context);
+solvvySdkInstance.startSolvvy(context, urlWebSupport);
 
 ```
 ### Advanced Scenarios
